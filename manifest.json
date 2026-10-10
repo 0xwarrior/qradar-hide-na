@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "QRadar - Hide N/A Event Properties",
-  "version": "1.1.0",
-  "description": "Hides disabled/N-A rows in the QRadar event investigation properties table, with a toggle to show them again.",
+  "name": "QRadar Declutter",
+  "version": "1.2.1",
+  "description": "Declutters IBM QRadar: hides N/A event rows, plus the Magnitude column and infographics on the Offenses tab. Toggle each on or off.",
   "permissions": ["storage", "scripting"],
   "optional_host_permissions": ["*://*/*"],
   "background": {
@@ -10,7 +10,7 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Toggle N/A rows"
+    "default_title": "QRadar Declutter"
   },
   "options_page": "options.html",
   "commands": {
