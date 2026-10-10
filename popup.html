@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: -apple-system, "Segoe UI", Arial, sans-serif;
-      width: 220px;
+      width: 240px;
       padding: 12px;
       margin: 0;
     }
@@ -22,6 +22,9 @@
       font-size: 13px;
       color: #333;
       cursor: pointer;
+    }
+    label + label {
+      margin-top: 8px;
     }
     .status {
       margin-top: 8px;
@@ -42,14 +45,22 @@
   </style>
 </head>
 <body>
-  <h1>Hide N/A Event Rows</h1>
+  <h1>QRadar Display Options</h1>
   <label>
-    <span>Hide disabled rows</span>
+    <span>Hide N/A event rows</span>
     <input type="checkbox" id="toggle">
   </label>
-  <div class="status" id="status">Applies to the current QRadar tab.</div>
+  <label>
+    <span>Hide Magnitude column (Offenses)</span>
+    <input type="checkbox" id="toggleMagnitude">
+  </label>
+  <label>
+    <span>Hide offense infographics section</span>
+    <input type="checkbox" id="toggleChart">
+  </label>
+  <div class="status" id="status">Applies to your QRadar tabs.</div>
   <div class="footer">
-    Shortcut: Alt+Shift+H &middot; <a href="#" id="openOptions">Configure QRadar host</a>
+    Shortcut (N/A rows): Alt+Shift+H &middot; <a href="#" id="openOptions">Configure QRadar host</a>
   </div>
   <script src="popup.js"></script>
 </body>
