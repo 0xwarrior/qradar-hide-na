@@ -1,4 +1,4 @@
-// QRadar - Hide N/A Event Properties (service worker)
+// QRadar Declutter (service worker)
 //
 // Content script access is granted dynamically per the host the user
 // configures in the options page (chrome.permissions), rather than a
