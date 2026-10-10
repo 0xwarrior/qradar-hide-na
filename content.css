@@ -1,3 +1,11 @@
 tr.disabledRow.qr-hide-na {
   display: none !important;
 }
+
+.qr-hide-col {
+  display: none !important;
+}
+
+#infoGraphicsSection.qr-hide-chart {
+  display: none !important;
+}
