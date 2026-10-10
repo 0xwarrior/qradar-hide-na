@@ -1,8 +1,19 @@
-const checkbox = document.getElementById('toggle');
 const status = document.getElementById('status');
 
-chrome.storage.sync.get({ hideEnabled: true }, (data) => {
-  checkbox.checked = data.hideEnabled;
+// checkbox id -> chrome.storage.sync key (all default to hidden)
+const OPTIONS = {
+  toggle: 'hideEnabled',
+  toggleMagnitude: 'hideMagnitude',
+  toggleChart: 'hideChart'
+};
+
+const defaults = {};
+Object.values(OPTIONS).forEach((key) => { defaults[key] = true; });
+
+chrome.storage.sync.get(defaults, (data) => {
+  for (const [id, key] of Object.entries(OPTIONS)) {
+    document.getElementById(id).checked = data[key];
+  }
 });
 
 document.getElementById('openOptions').addEventListener('click', (e) => {
@@ -10,19 +21,23 @@ document.getElementById('openOptions').addEventListener('click', (e) => {
   chrome.runtime.openOptionsPage();
 });
 
-checkbox.addEventListener('change', () => {
-  const value = checkbox.checked;
+for (const [id, key] of Object.entries(OPTIONS)) {
+  document.getElementById(id).addEventListener('change', (e) => {
+    const value = e.target.checked;
 
-  chrome.storage.sync.set({ hideEnabled: value });
+    // Content scripts in every open QRadar tab pick this up via storage.onChanged.
+    chrome.storage.sync.set({ [key]: value });
 
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    if (!tabs[0]) return;
-    chrome.tabs.sendMessage(tabs[0].id, { type: 'SET_HIDE_ENABLED', value }, () => {
-      if (chrome.runtime.lastError) {
-        status.textContent = 'No QRadar event panel detected on this tab.';
-      } else {
-        status.textContent = 'Applies to the current QRadar tab.';
-      }
+    // Message the active tab only to report whether the extension is running there.
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (!tabs[0]) return;
+      chrome.tabs.sendMessage(tabs[0].id, { type: 'SET_OPTION', key, value }, () => {
+        if (chrome.runtime.lastError) {
+          status.textContent = 'No QRadar page detected on this tab.';
+        } else {
+          status.textContent = 'Applies to your QRadar tabs.';
+        }
+      });
     });
   });
-});
+}
