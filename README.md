@@ -38,7 +38,7 @@ toggle to bring it back.
 
 ### Chrome Web Store
 
-Straight from the [Chrome Web Store](https://chromewebstore.google.com/detail/qradar-hide-na-event-prop/nmnemlnfcheohfakpckkffgdfeklimpj) (as simple as that!!!).
+Straight from the [Chrome Web Store](https://chromewebstore.google.com/detail/qradar-declutter/nmnemlnfcheohfakpckkffgdfeklimpj) (as simple as that!!!).
 
 ### Unpacked / developer mode
 
